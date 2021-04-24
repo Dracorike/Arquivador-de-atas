@@ -106,4 +106,39 @@ public class Atas {
     public void set_id(int _id) {
         this._id = _id;
     }
+
+    public String inicioReuniao(){
+        LocalDateTime inicio = this.inicioReuniao;
+        return inicio.getDayOfMonth() + "/" + inicio.getMonthValue()
+        + "/" + inicio.getYear() + " - " + inicio.getHour() + ":" + inicio.getMinute();
+    }
+
+    public String fimReuniao(){
+        LocalDateTime fim = this.terminoReuniao;
+        return fim.getDayOfMonth() + "/" + fim.getMonthValue()
+                + "/" + fim.getYear() + " - " + fim.getHour() + ":" + fim.getMinute();
+    }
+
+    public String palavrasChaves(){
+        String[] palavras = new String[5];
+        palavras = this.palavrasChave;
+        return palavras[0] + "\n" + palavras[1] + "\n" + palavras[2] + "\n" +
+                palavras[3] + "\n" + palavras[4];
+    }
+
+    public void participantes(){
+        System.out.println("Funcionarios:");
+        for (Funcionario funcionario: participantesFuncionario){
+            System.out.println(funcionario.getNomeFuncionario());
+        }
+        System.out.println("Não funcionarios: ");
+        for(NaoFuncionario naoFuncionario: participantesNaoFuncionario){
+            System.out.println(naoFuncionario.getNome());
+        }
+    }
+
+    public String dataEmissao(){
+        LocalDate data = this.dataEmissao;
+        return data.getDayOfMonth() + "/" + data.getMonthValue() + "/" + data.getYear();
+    }
 }

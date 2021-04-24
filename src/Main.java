@@ -4,6 +4,7 @@ import Model.Atas;
 import Model.Funcionario;
 import Model.NaoFuncionario;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Scanner;
@@ -49,13 +50,18 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("Atas");
-                    bancoAtas.read();
+                    bancoAtas.detalhes();
                     break;
                 case 4:
                     System.out.println("Iniciar Nova reunião");
                     System.out.print("Quantos membros terá nesta reunião? ");
                     int membroReun = teclado.nextInt();
                     teclado.nextLine();
+
+                    if(membroReun < 2){
+                        System.out.println("A reunião só poderá ser feita com mais de uma pessoa.");
+                        break;
+                    }
                     String nomeMembros[] = new String[membroReun];
 
                     Atas nova = new Atas();
@@ -104,19 +110,46 @@ public class Main {
                     nova.setInicioReuniao(inicio);
 
                     System.out.println("---------------- Pauta ----------------");
-                    String pauta = teclado.next();
+                    String pauta = teclado.nextLine();
+                    nova.setPauta(pauta);
 
-                    while(true){
-                        System.out.println("Quer continuar escrevendo?[S/N] ");
-                        String decisao = teclado.nextLine().toLowerCase(Locale.ROOT);
-                        if(decisao == "s"){
-                            pauta = pauta + ("\n" + teclado.nextLine());
-                        }else{
-                            break;
-                        }
+                    System.out.println("Digite 5 palavras chaves");
+                    String[] palavrasChaves = new String[5];
+                    for(int i = 0; i < palavrasChaves.length; i++){
+                        System.out.print("Palavra [" + (i+1) + "]: ");
+                        palavrasChaves[i] = teclado.next();
+                    }
+                    nova.setPalavrasChave(palavrasChaves);
+
+                    teclado.nextLine();
+                    System.out.println("Termino da Reunião");
+                    System.out.print("Dia[aaaa-mm-dd]: ");
+                    String dataFim = teclado.nextLine();
+                    System.out.print("Hora[hora:minuto]: ");
+                    String horaFim = teclado.nextLine();
+                    LocalDateTime fim = inicioReuniao(dataFim, horaFim);
+                    nova.setTerminoReuniao(fim);
+
+                    System.out.println("Data de Emissão[aaaa-mm-dd]");
+                    String emissao = teclado.next();
+                    LocalDate dataEmissao = LocalDate.parse(emissao);
+                    nova.setDataEmissao(dataEmissao);
+
+                    System.out.print("Deseja que essa ata seja privada?[S/N]");
+                    String privar = teclado.next();
+                    if(privar.toLowerCase().equals("s")){
+                        System.out.println("Ata Privada");
+                        nova.setPublica(false);
+                    }else{
+                        System.out.println("Ata Publica");
+                        nova.setPublica(true);
                     }
 
+                    nova.setRevisao(true);
 
+                    bancoAtas.create(nova);
+
+                    System.out.println("Reunião concluída.");
                     break;
                 case 5:
 
@@ -146,7 +179,6 @@ public class Main {
         novo.setFuncao(cargo);
         return novo;
     }
-
 
     public static LocalDateTime inicioReuniao(String dataInicio, String horaInicio){
         LocalDateTime inicio = LocalDateTime.parse(dataInicio + "T" + horaInicio + ":00");

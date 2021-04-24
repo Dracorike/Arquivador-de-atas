@@ -54,4 +54,35 @@ public class BD_Atas {
         System.out.println("---------------------------------------------------------------------");
         System.out.println();
     }
+
+    public void revisoesPendentes(){
+        for(Atas ata: listaDeAtas){
+            if(ata.isRevisao()){
+                System.out.println(ata.getNomeReuniao());
+            }
+        }
+    }
+
+    public void detalhes(){
+        System.out.println("-----------------------------------------");
+        for(Atas atas: listaDeAtas){
+            System.out.println("" +
+                    "Título: " + atas.getNomeReuniao() + "\n" +
+                    "Setor: " + atas.getSetorOrg() +  "\n" +
+                    "Inicio da Reunião: " + atas.inicioReuniao() + "\n" +
+                    "Fim da Reunião: " + atas.fimReuniao() + "\n"+
+                    " --------------- Pauta --------------- \n" +
+                    atas.getPauta() + "\n" +
+                    "---------------------------------------- \n" +
+                    "Palavras Chave: \n" +
+                    atas.palavrasChaves()
+            );
+            System.out.println("Participantes");
+            atas.participantes();
+            System.out.println("Data de Emissão: " + atas.dataEmissao());
+        }
+        System.out.println("-----------------------------------------");
+
+    }
+
 }
