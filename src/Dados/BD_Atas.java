@@ -56,11 +56,13 @@ public class BD_Atas {
     }
 
     public void revisoesPendentes(){
+        System.out.println("=============================================");
         for(Atas ata: listaDeAtas){
             if(ata.isRevisao()){
-                System.out.println(ata.getNomeReuniao());
+                System.out.println("Ata: " + ata.getNomeReuniao());
             }
         }
+        System.out.println("=============================================");
     }
 
     public void detalhes(){
@@ -74,11 +76,13 @@ public class BD_Atas {
                     " --------------- Pauta --------------- \n" +
                     atas.getPauta() + "\n" +
                     "---------------------------------------- \n" +
-                    "Palavras Chave: \n" +
-                    atas.palavrasChaves()
+                    "-------------- Palavras Chave -------------- \n" +
+                    atas.palavrasChaves() + "\n" +
+                    "---------------------------------------- "
             );
-            System.out.println("Participantes");
+            System.out.println("============= Participantes =============");
             atas.participantes();
+            System.out.println("=========================================");
             System.out.println("Data de Emissão: " + atas.dataEmissao());
         }
         System.out.println("-----------------------------------------");

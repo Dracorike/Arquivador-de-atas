@@ -131,10 +131,12 @@ public class Atas {
         for (Funcionario funcionario: participantesFuncionario){
             System.out.println(funcionario.getNomeFuncionario());
         }
+        System.out.println();
         System.out.println("Não funcionarios: ");
         for(NaoFuncionario naoFuncionario: participantesNaoFuncionario){
             System.out.println(naoFuncionario.getNome());
         }
+        System.out.println();
     }
 
     public String dataEmissao(){

@@ -38,8 +38,11 @@ public class BD_FuncionariosCadastrados {
     public Funcionario searchByName(String nome){
         Funcionario finded = new Funcionario();
         for(Funcionario funcionario: listaFuncionarios){
-            if(funcionario.getNomeFuncionario() == nome){
-                finded = funcionario;
+            if(funcionario.getNomeFuncionario().equals(nome)){
+                finded.set_id(funcionario.get_id());
+                finded.setNomeFuncionario(funcionario.getNomeFuncionario());
+                finded.setFuncao(funcionario.getFuncao());
+                finded.setCPF(funcionario.getCPF());
             }
         }
         return finded;

@@ -6,7 +6,6 @@ import Model.NaoFuncionario;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -130,7 +129,7 @@ public class Main {
                     LocalDateTime fim = inicioReuniao(dataFim, horaFim);
                     nova.setTerminoReuniao(fim);
 
-                    System.out.println("Data de Emissão[aaaa-mm-dd]");
+                    System.out.print("Data de Emissão[aaaa-mm-dd]: ");
                     String emissao = teclado.next();
                     LocalDate dataEmissao = LocalDate.parse(emissao);
                     nova.setDataEmissao(dataEmissao);
@@ -152,7 +151,7 @@ public class Main {
                     System.out.println("Reunião concluída.");
                     break;
                 case 5:
-
+                    bancoAtas.revisoesPendentes();
                     break;
 
             }
